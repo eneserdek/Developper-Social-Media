@@ -72,7 +72,7 @@ router.post(
         payload,
         config.get('jwtSecret' /*the same we did with mongoDB*/),
         {
-          expiresIn: 3600 /*it means an hour*/,
+          expiresIn: 360000 /*it means an hour*/,
         },
         (err, token) => {
           if (err) throw err;
