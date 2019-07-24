@@ -1,3 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://enes123:abc123def@devconnector-6fkjz.mongodb.net/test?retryWrites=true&w=majority"
+  "mongoURI": "mongodb+srv://enes123:abc123def@devconnector-6fkjz.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "mysecrettoken"
 }
