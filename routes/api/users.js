@@ -4,7 +4,7 @@ const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
-const { check, validationResult } = require('express-validator/check');
+const { check, validationResult } = require('express-validator');
 
 //User Model
 const User = require('../../models/User');
@@ -72,7 +72,7 @@ router.post(
         payload,
         config.get('jwtSecret' /*the same we did with mongoDB*/),
         {
-          expiresIn: 360000 /*it means an hour*/,
+          expiresIn: 3600 /*it means an hour*/,
         },
         (err, token) => {
           if (err) throw err;
