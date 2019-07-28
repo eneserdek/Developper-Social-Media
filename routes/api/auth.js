@@ -24,7 +24,7 @@ router.get('/', auth /*adding this will make this route protected*/, async (req,
 });
 
 // @route     POST api/auth
-// @desc      Authentication user & get token
+// @desc      Authenticate user & get token
 // @access    Public
 
 router.post(
