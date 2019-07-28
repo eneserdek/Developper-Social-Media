@@ -6,6 +6,8 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 const { check, validationResult } = require('express-validator');
 
+// This file is for the any kind of request to handle with regard to the user : Sing In, Create,
+
 //User Model
 const User = require('../../models/User');
 
