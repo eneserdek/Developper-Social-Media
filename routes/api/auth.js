@@ -58,12 +58,12 @@ router.post(
           id: user.id,
         },
       };
-
+      // to associate a token to a session
       jwt.sign(
         payload,
-        config.get('jwtSecret' /*the same we did with mongoDB*/),
+        config.get('jwtSecret' /*the same we did with mongoDB with mongoURI*/),
         {
-          expiresIn: 360000 /*it means an hour*/,
+          expiresIn: 360000 /*it means 100 hours*/,
         },
         (err, token) => {
           if (err) throw err;
