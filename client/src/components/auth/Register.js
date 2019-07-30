@@ -1,7 +1,12 @@
 import React, { Fragment, useState } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { setAlert } from '../../actions/alert';
+import PropTypes from 'prop-types';
 
-const Register = () => {
+// import axios from 'axios'; Since we are going to use redux, we will not use axios.
+
+const Register = props => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -15,25 +20,28 @@ const Register = () => {
   const onSubmit = async event => {
     event.preventDefault();
     if (password !== password2) {
-      console.log(`Passwords do not match`);
+      props.setAlert(`Passwords do not match`, 'danger');
     } else {
-      const newUser = {
-        name,
-        email,
-        password,
-      };
-      try {
-        const config = {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        };
-        const body = JSON.stringify(newUser);
-        const res = await axios.post('/api/users', body, config);
-        console.log(res.data);
-      } catch (err) {
-        console.error(err.response.data);
-      }
+      console.log(`SUCCESS!`);
+      // We are going to use redux for actions. Thats why we will not use above code to make requests.
+
+      // const newUser = {
+      //   name,
+      //   email,
+      //   password,
+      // };
+      // try {
+      //   const config = {
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //     },
+      //   };
+      //   const body = JSON.stringify(newUser);
+      //   const res = await axios.post('/api/users', body, config);
+      //   console.log(res.data);
+      // } catch (err) {
+      //   console.error(err.response.data);
+      // }
     }
   };
 
@@ -90,10 +98,17 @@ const Register = () => {
         <input type='submit' className='btn btn-primary' value='Register' />
       </form>
       <p className='my-1'>
-        Already have an account? <a href='login.html'>Sign In</a>
+        Already have an account? <Link to='/login'>Sign In</Link>
       </p>
     </Fragment>
   );
 };
 
-export default Register;
+Register.propTypes = {
+  setAlert: PropTypes.func.isRequired,
+};
+
+export default connect(
+  null,
+  { setAlert },
+)(Register);
