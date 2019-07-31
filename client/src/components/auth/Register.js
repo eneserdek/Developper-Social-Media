@@ -1,12 +1,15 @@
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+
 import { setAlert } from '../../actions/alert';
+import { register } from '../../actions/auth';
+
 import PropTypes from 'prop-types';
 
 // import axios from 'axios'; Since we are going to use redux, we will not use axios.
 
-const Register = props => {
+const Register = ({ setAlert, register }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -20,9 +23,9 @@ const Register = props => {
   const onSubmit = async event => {
     event.preventDefault();
     if (password !== password2) {
-      props.setAlert(`Passwords do not match`, 'danger');
+      setAlert(`Passwords do not match`, 'danger');
     } else {
-      console.log(`SUCCESS!`);
+      register({ name, email, password });
       // We are going to use redux for actions. Thats why we will not use above code to make requests.
 
       // const newUser = {
@@ -59,7 +62,7 @@ const Register = props => {
             name='name'
             value={name}
             onChange={event => onChange(event)}
-            required
+            //required
           />
         </div>
         <div className='form-group'>
@@ -69,7 +72,7 @@ const Register = props => {
             name='email'
             value={email}
             onChange={event => onChange(event)}
-            required
+            //required
           />
           <small className='form-text'>
             This site uses Gravatar so if you want a profile image, use a Gravatar email
@@ -80,7 +83,7 @@ const Register = props => {
             type='password'
             placeholder='Password'
             name='password'
-            minLength='6'
+            //minLength='6'
             value={password}
             onChange={event => onChange(event)}
           />
@@ -90,7 +93,7 @@ const Register = props => {
             type='password'
             placeholder='Confirm Password'
             name='password2'
-            minLength='6'
+            //minLength='6'
             value={password2}
             onChange={event => onChange(event)}
           />
@@ -106,9 +109,10 @@ const Register = props => {
 
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
 };
 
 export default connect(
   null,
-  { setAlert },
+  { setAlert, register },
 )(Register);
