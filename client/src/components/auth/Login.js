@@ -1,8 +1,11 @@
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { login } from '../../actions/auth';
 // import axios from 'axios'; Since we are going to use redux, we will not use axios.
 
-const Login = () => {
+const Login = ({ login, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -13,27 +16,15 @@ const Login = () => {
   const onChange = event => setFormData({ ...formData, [event.target.name]: event.target.value });
   const onSubmit = async event => {
     event.preventDefault();
-
-    console.log(`SUCCESS!`);
-    // We are going to use redux for actions. Thats why we will not use above code to make requests.
-
-    // const User = {
-    //   email,
-    //   password,
-    // };
-    // try {
-    //   const config = {
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //   };
-    //   const body = JSON.stringify(newUser);
-    //   const res = await axios.post('/api/users', body, config);
-    //   console.log(res.data);
-    // } catch (err) {
-    //   console.error(err.response.data);
-    // }
+    login(email, password);
   };
+
+  //Redirect if logged in
+  //After authentication we are redirecting user to the dashboard page.
+
+  if (isAuthenticated) {
+    return <Redirect to='/dashboard' />;
+  }
 
   return (
     <Fragment>
@@ -72,4 +63,16 @@ const Login = () => {
   );
 };
 
-export default Login;
+Login.propTypes = {
+  login: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
+};
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(
+  mapStateToProps,
+  { login },
+)(Login);
