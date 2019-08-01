@@ -38,6 +38,7 @@ const App = () => {
             <Switch>
               <Route exact path='/register' component={Register} />
               <Route exact path='/login' component={Login} />
+              {/* Private routing is added. When a user logs out it automatically redirects to login page from dashboard. So to reach dashboard we need to be either authenticated or loading */}
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
             </Switch>
           </section>
