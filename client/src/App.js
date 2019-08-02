@@ -9,6 +9,7 @@ import Login from './components/auth/Login';
 import Alert from './components/layout/Alert';
 import Dashboard from './components/dashboard/Dashboard';
 import CreateProfile from './components/profile-forms/CreateProfile';
+import EditProfile from './components/profile-forms/EditProfile';
 import PrivateRoute from './components/dashboard/routing/PrivateRoute';
 
 //Redux
@@ -42,6 +43,7 @@ const App = () => {
               {/* Private routing is added. When a user logs out it automatically redirects to login page from dashboard. So to reach dashboard we need to be either authenticated or loading */}
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
               <PrivateRoute exact path='/create-profile' component={CreateProfile} />
+              <PrivateRoute exact path='/edit-profile' component={EditProfile} />
             </Switch>
           </section>
         </Fragment>
