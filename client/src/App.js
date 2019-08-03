@@ -14,6 +14,7 @@ import EditProfile from './components/profile-forms/EditProfile';
 import AddExperience from './components/profile-forms/AddExperience';
 import AddEducation from './components/profile-forms/AddEducation';
 import Profiles from './components/profiles/Profiles';
+import Profile from './components/profile/Profile';
 
 import PrivateRoute from './components/dashboard/routing/PrivateRoute';
 
@@ -46,6 +47,7 @@ const App = () => {
               <Route exact path='/register' component={Register} />
               <Route exact path='/login' component={Login} />
               <Route exact path='/profiles' component={Profiles} />
+              <Route exact path='/profile/:id' component={Profile} />
 
               {/* Private routing is added. When a user logs out it automatically redirects to login page from dashboard. So to reach dashboard we need to be either authenticated or loading */}
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
